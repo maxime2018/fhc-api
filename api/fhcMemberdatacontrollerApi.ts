@@ -28,15 +28,9 @@ import * as models from "../model/models"
 export class fhcMemberdatacontrollerApi {
   host: string
   headers: Array<XHR.Header>
-  fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  constructor(
-    host: string,
-    headers: any,
-    fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  ) {
+  constructor(host: string, headers: any) {
     this.host = host
     this.headers = Object.keys(headers).map(k => new XHR.Header(k, headers[k]))
-    this.fetchImpl = fetchImpl
   }
 
   setHeaders(h: Array<XHR.Header>) {
@@ -60,7 +54,8 @@ export class fhcMemberdatacontrollerApi {
     hcpQuality?: string,
     date?: number,
     endDate?: number,
-    hospitalized?: boolean
+    hospitalized?: boolean,
+    requestType?: string
   ): Promise<models.MemberDataResponse | any> {
     let _body = null
 
@@ -77,7 +72,8 @@ export class fhcMemberdatacontrollerApi {
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (date ? "&date=" + date : "") +
       (endDate ? "&endDate=" + endDate : "") +
-      (hospitalized ? "&hospitalized=" + hospitalized : "")
+      (hospitalized ? "&hospitalized=" + hospitalized : "") +
+      (requestType ? "&requestType=" + requestType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -85,7 +81,7 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -100,7 +96,8 @@ export class fhcMemberdatacontrollerApi {
     hcpQuality?: string,
     date?: number,
     endDate?: number,
-    hospitalized?: boolean
+    hospitalized?: boolean,
+    requestType?: string
   ): Promise<models.MemberDataResponse | any> {
     let _body = null
 
@@ -115,7 +112,8 @@ export class fhcMemberdatacontrollerApi {
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (date ? "&date=" + date : "") +
       (endDate ? "&endDate=" + endDate : "") +
-      (hospitalized ? "&hospitalized=" + hospitalized : "")
+      (hospitalized ? "&hospitalized=" + hospitalized : "") +
+      (requestType ? "&requestType=" + requestType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -123,7 +121,7 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -140,7 +138,8 @@ export class fhcMemberdatacontrollerApi {
     hcpQuality?: string,
     date?: number,
     endDate?: number,
-    hospitalized?: boolean
+    hospitalized?: boolean,
+    requestType?: string
   ): Promise<models.MemberDataResponse | any> {
     let _body = null
     _body = facets
@@ -158,7 +157,8 @@ export class fhcMemberdatacontrollerApi {
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (date ? "&date=" + date : "") +
       (endDate ? "&endDate=" + endDate : "") +
-      (hospitalized ? "&hospitalized=" + hospitalized : "")
+      (hospitalized ? "&hospitalized=" + hospitalized : "") +
+      (requestType ? "&requestType=" + requestType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -166,7 +166,7 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -182,7 +182,8 @@ export class fhcMemberdatacontrollerApi {
     hcpQuality?: string,
     date?: number,
     endDate?: number,
-    hospitalized?: boolean
+    hospitalized?: boolean,
+    requestType?: string
   ): Promise<models.MemberDataResponse | any> {
     let _body = null
     _body = facets
@@ -198,7 +199,8 @@ export class fhcMemberdatacontrollerApi {
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (date ? "&date=" + date : "") +
       (endDate ? "&endDate=" + endDate : "") +
-      (hospitalized ? "&hospitalized=" + hospitalized : "")
+      (hospitalized ? "&hospitalized=" + hospitalized : "") +
+      (requestType ? "&requestType=" + requestType : "")
     let headers = this.headers
     headers = headers
       .filter(h => h.header !== "Content-Type")
@@ -206,7 +208,7 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }

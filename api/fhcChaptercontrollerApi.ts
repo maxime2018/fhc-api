@@ -28,15 +28,9 @@ import * as models from "../model/models"
 export class fhcChaptercontrollerApi {
   host: string
   headers: Array<XHR.Header>
-  fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  constructor(
-    host: string,
-    headers: any,
-    fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  ) {
+  constructor(host: string, headers: any) {
     this.host = host
     this.headers = Object.keys(headers).map(k => new XHR.Header(k, headers[k]))
-    this.fetchImpl = fetchImpl
   }
 
   setHeaders(h: Array<XHR.Header>) {
@@ -94,7 +88,7 @@ export class fhcChaptercontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -138,7 +132,7 @@ export class fhcChaptercontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -180,7 +174,7 @@ export class fhcChaptercontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -201,7 +195,7 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.ParagraphPreview(it)))
       .catch(err => this.handleError(err))
   }
@@ -222,7 +216,7 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.ParagraphPreview(it)))
       .catch(err => this.handleError(err))
   }
@@ -249,7 +243,7 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => doc.body)
       .catch(err => this.handleError(err))
   }
@@ -270,7 +264,7 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.AddedDocumentPreview(it)))
       .catch(err => this.handleError(err))
   }
@@ -291,7 +285,7 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => new models.MppPreview(it)))
       .catch(err => this.handleError(err))
   }
@@ -312,7 +306,7 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.ParagraphInfos(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -335,7 +329,7 @@ export class fhcChaptercontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => (doc.body as Array<JSON>).map(it => JSON.parse(JSON.stringify(it))))
       .catch(err => this.handleError(err))
   }
@@ -396,7 +390,7 @@ export class fhcChaptercontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.AgreementResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }

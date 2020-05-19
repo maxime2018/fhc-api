@@ -28,9 +28,13 @@ export class SamlTokenResult {
   constructor(json: JSON | any) {
     Object.assign(this as SamlTokenResult, json)
   }
+  quality?: string
+
   timestamp?: number
 
   token?: string
+
+  tokenBase64?: string
 
   tokenId?: string
 

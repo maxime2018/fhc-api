@@ -28,15 +28,9 @@ import * as models from "../model/models"
 export class fhcEattestvcontrollerApi {
   host: string
   headers: Array<XHR.Header>
-  fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  constructor(
-    host: string,
-    headers: any,
-    fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  ) {
+  constructor(host: string, headers: any) {
     this.host = host
     this.headers = Object.keys(headers).map(k => new XHR.Header(k, headers[k]))
-    this.fetchImpl = fetchImpl
   }
 
   setHeaders(h: Array<XHR.Header>) {
@@ -48,7 +42,7 @@ export class fhcEattestvcontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  cancelAttestWithResponseUsingDELETE(
+  cancelAttesWithResponseUsingDELETE(
     patientSsin: string,
     xFHCKeystoreId: string,
     xFHCTokenId: string,
@@ -100,7 +94,7 @@ export class fhcEattestvcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.SendAttestResultWithResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -156,7 +150,7 @@ export class fhcEattestvcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("DELETE", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("DELETE", _url, headers, _body)
       .then(doc => new models.SendAttestResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -218,7 +212,7 @@ export class fhcEattestvcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.SendAttestResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -280,7 +274,7 @@ export class fhcEattestvcontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.SendAttestResultWithResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
