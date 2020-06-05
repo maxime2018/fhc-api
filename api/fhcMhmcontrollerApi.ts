@@ -51,9 +51,9 @@ export class fhcMhmcontrollerApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    io: string,
     reference: string,
     patientSsin?: string,
+    io?: string,
     ioMembership?: string
   ): Promise<models.CancelSubscriptionResultWithResponse | any> {
     let _body = null
@@ -83,7 +83,7 @@ export class fhcMhmcontrollerApi {
       .then(doc => new models.CancelSubscriptionResultWithResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  endSubscriptionUsingPOST(
+  notifySubscriptionClosureUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
@@ -92,12 +92,12 @@ export class fhcMhmcontrollerApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    io: string,
     reference: string,
     endDate: number,
     reason: string,
     decisionType: string,
     patientSsin?: string,
+    io?: string,
     ioMembership?: string
   ): Promise<models.EndSubscriptionResultWithResponse | any> {
     let _body = null
@@ -139,13 +139,13 @@ export class fhcMhmcontrollerApi {
     patientFirstName: string,
     patientLastName: string,
     patientGender: string,
-    io: string,
     startDate: number,
     isTrial: boolean,
     signatureType: string,
     isRecovery: boolean,
     isTestForNotify: boolean,
     patientSsin?: string,
+    io?: string,
     ioMembership?: string
   ): Promise<models.StartSubscriptionResultWithResponse | any> {
     let _body = null
