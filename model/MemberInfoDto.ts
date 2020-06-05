@@ -24,17 +24,13 @@
 
 import * as models from "./models"
 
-export class SamlTokenResult {
+export class MemberInfoDto {
   constructor(json: JSON | any) {
-    Object.assign(this as SamlTokenResult, json)
+    Object.assign(this as MemberInfoDto, json)
   }
-  quality?: string
+  hospitalized?: boolean
 
-  timestamp?: number
+  ioMembership?: string
 
-  token?: string
-
-  tokenId?: string
-
-  validity?: number
+  ssin?: string
 }

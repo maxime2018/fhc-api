@@ -24,17 +24,21 @@
 
 import * as models from "./models"
 
-export class SamlTokenResult {
+export class StartSubscriptionResultWithResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as SamlTokenResult, json)
+    Object.assign(this as StartSubscriptionResultWithResponse, json)
   }
-  quality?: string
+  commonOutput?: models.CommonOutput
 
-  timestamp?: number
+  inscriptionDate?: number
 
-  token?: string
+  kmehrMessage?: Array<string>
 
-  tokenId?: string
+  mycarenetConversation?: models.MycarenetConversation
 
-  validity?: number
+  reference?: string
+
+  subscriptionsStartDate?: number
+
+  xades?: Array<string>
 }

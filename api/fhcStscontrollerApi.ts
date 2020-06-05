@@ -28,15 +28,9 @@ import * as models from "../model/models"
 export class fhcStscontrollerApi {
   host: string
   headers: Array<XHR.Header>
-  fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  constructor(
-    host: string,
-    headers: any,
-    fetchImpl?: (input: RequestInfo, init?: RequestInit) => Promise<Response>
-  ) {
+  constructor(host: string, headers: any) {
     this.host = host
     this.headers = Object.keys(headers).map(k => new XHR.Header(k, headers[k]))
-    this.fetchImpl = fetchImpl
   }
 
   setHeaders(h: Array<XHR.Header>) {
@@ -57,7 +51,7 @@ export class fhcStscontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -70,7 +64,7 @@ export class fhcStscontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
@@ -95,7 +89,7 @@ export class fhcStscontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.BearerToken(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -115,7 +109,7 @@ export class fhcStscontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.CertificateInfo(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -138,7 +132,7 @@ export class fhcStscontrollerApi {
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => true)
       .catch(err => this.handleError(err))
   }
@@ -146,8 +140,8 @@ export class fhcStscontrollerApi {
     xFHCPassPhrase: string,
     ssin: string,
     xFHCKeystoreId: string,
-    xFHCTokenId: string,
-    quality: string
+    quality: string,
+    xFHCTokenId?: string
   ): Promise<models.SamlTokenResult | any> {
     let _body = null
 
@@ -164,7 +158,7 @@ export class fhcStscontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
-    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("GET", _url, headers, _body)
       .then(doc => new models.SamlTokenResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
@@ -172,10 +166,10 @@ export class fhcStscontrollerApi {
     xFHCPassPhrase: string,
     ssin: string,
     xFHCKeystoreId: string,
-    xFHCTokenId: string,
     isMedicalHouse?: boolean,
     isGuardPost?: boolean,
-    isSortingCenter?: boolean
+    isSortingCenter?: boolean,
+    xFHCTokenId?: string
   ): Promise<models.SamlTokenResult | any> {
     let _body = null
 
@@ -211,7 +205,7 @@ export class fhcStscontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "multipart/form-data"))
-    return XHR.sendCommand("POST", _url, headers, _body, this.fetchImpl)
+    return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.UUIDType(doc.body as JSON))
       .catch(err => this.handleError(err))
   }

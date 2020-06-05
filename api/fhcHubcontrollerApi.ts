@@ -327,7 +327,9 @@ export class fhcHubcontrollerApi {
     sl: string,
     id: string,
     hubPackageId?: string,
-    breakTheGlassReason?: string
+    breakTheGlassReason?: string,
+    externalHubId?: string,
+    externalHubName?: string
   ): Promise<models.Kmehrmessage | any> {
     let _body = null
 
@@ -347,6 +349,8 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
+      (externalHubId ? "&externalHubId=" + externalHubId : "") +
+      (externalHubName ? "&externalHubName=" + externalHubName : "") +
       (id ? "&id=" + id : "")
     let headers = this.headers
     headers = headers
@@ -468,7 +472,9 @@ export class fhcHubcontrollerApi {
     sl: string,
     id: string,
     hubPackageId?: string,
-    breakTheGlassReason?: string
+    breakTheGlassReason?: string,
+    externalHubId?: string,
+    externalHubName?: string
   ): Promise<models.Kmehrmessage | any> {
     let _body = null
 
@@ -488,6 +494,8 @@ export class fhcHubcontrollerApi {
       (hubPackageId ? "&hubPackageId=" + hubPackageId : "") +
       (hcpZip ? "&hcpZip=" + hcpZip : "") +
       (breakTheGlassReason ? "&breakTheGlassReason=" + breakTheGlassReason : "") +
+      (externalHubId ? "&externalHubId=" + externalHubId : "") +
+      (externalHubName ? "&externalHubName=" + externalHubName : "") +
       (id ? "&id=" + id : "")
     let headers = this.headers
     headers = headers

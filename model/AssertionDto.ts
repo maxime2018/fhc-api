@@ -24,17 +24,25 @@
 
 import * as models from "./models"
 
-export class SamlTokenResult {
+export class AssertionDto {
   constructor(json: JSON | any) {
-    Object.assign(this as SamlTokenResult, json)
+    Object.assign(this as AssertionDto, json)
   }
-  quality?: string
+  advice?: models.AdviceType
 
-  timestamp?: number
+  conditions?: models.Conditions
 
-  token?: string
+  id?: string
 
-  tokenId?: string
+  issueInstant?: number
 
-  validity?: number
+  issuer?: models.NameIDType
+
+  signature?: models.Signature
+
+  statementsAndAuthnStatementsAndAuthzDecisionStatements?: Array<models.StatementAbstractType>
+
+  subject?: models.Subject
+
+  version?: string
 }

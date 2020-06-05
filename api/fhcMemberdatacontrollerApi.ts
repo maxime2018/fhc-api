@@ -85,6 +85,37 @@ export class fhcMemberdatacontrollerApi {
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
+  getMemberDataMessageUsingPOST(
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpName: string,
+    messageNames: Array<string>
+  ): Promise<models.MemberDataResponseDto | any> {
+    let _body = null
+
+    const _url =
+      this.host +
+      "/mda/async/messages" +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (messageNames ? "&messageNames=" + messageNames : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => new models.MemberDataResponseDto(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   getMemberDataUsingGET(
     ssin: string,
     xFHCTokenId: string,
@@ -210,6 +241,48 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+  sendMemberDataRequestUsingPOST(
+    xFHCTokenId: string,
+    xFHCKeystoreId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpName: string,
+    io: string,
+    mdaRequest: models.MemberDataBatchRequestDto,
+    hcpQuality?: string,
+    date?: number,
+    endDate?: number,
+    hospitalized?: boolean,
+    requestType?: string
+  ): Promise<models.GenAsyncResponse | any> {
+    let _body = null
+    _body = mdaRequest
+
+    const _url =
+      this.host +
+      "/mda/async/request/{io}".replace("{io}", io + "") +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpName ? "&hcpName=" + hcpName : "") +
+      (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
+      (date ? "&date=" + date : "") +
+      (endDate ? "&endDate=" + endDate : "") +
+      (hospitalized ? "&hospitalized=" + hospitalized : "") +
+      (requestType ? "&requestType=" + requestType : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => new models.GenAsyncResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 }

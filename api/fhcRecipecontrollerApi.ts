@@ -75,6 +75,39 @@ export class fhcRecipecontrollerApi {
       .then(doc => new models.Prescription(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
+  createPrescriptionV4UsingPOST(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    hcpQuality: string,
+    hcpNihii: string,
+    hcpSsin: string,
+    hcpName: string,
+    xFHCPassPhrase: string,
+    prescription: models.PrescriptionRequest
+  ): Promise<models.Prescription | any> {
+    let _body = null
+    _body = prescription
+
+    const _url =
+      this.host +
+      "/recipe/v4" +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
+      (hcpName ? "&hcpName=" + hcpName : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => new models.Prescription(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
   getGalToAdministrationUnitUsingGET(galId: string): Promise<models.Code | any> {
     let _body = null
 

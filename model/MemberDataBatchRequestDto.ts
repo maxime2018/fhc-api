@@ -24,17 +24,11 @@
 
 import * as models from "./models"
 
-export class SamlTokenResult {
+export class MemberDataBatchRequestDto {
   constructor(json: JSON | any) {
-    Object.assign(this as SamlTokenResult, json)
+    Object.assign(this as MemberDataBatchRequestDto, json)
   }
-  quality?: string
+  facets?: Array<models.FacetDto>
 
-  timestamp?: number
-
-  token?: string
-
-  tokenId?: string
-
-  validity?: number
+  members?: Array<models.MemberInfoDto>
 }
