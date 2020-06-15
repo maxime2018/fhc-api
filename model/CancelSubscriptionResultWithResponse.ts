@@ -32,6 +32,10 @@ export class CancelSubscriptionResultWithResponse {
 
   decisionReference?: string
 
+  errors?: Array<models.MycarenetError>
+
+  genericErrors?: Array<models.FaultType>
+
   kmehrMessage?: Array<string>
 
   mycarenetConversation?: models.MycarenetConversation

@@ -24,25 +24,33 @@
 
 import * as models from "./models"
 
-export class StartSubscriptionResultWithResponse {
+export class MemberDataAcknowledge {
   constructor(json: JSON | any) {
-    Object.assign(this as StartSubscriptionResultWithResponse, json)
+    Object.assign(this as MemberDataAcknowledge, json)
   }
+  appliesTo?: string
+
   commonOutput?: models.CommonOutput
+
+  complete?: boolean
+
+  date?: Date
 
   errors?: Array<models.MycarenetError>
 
   genericErrors?: Array<models.FaultType>
 
-  inscriptionDate?: number
+  io?: string
 
-  kmehrMessage?: Array<string>
+  major?: string
 
-  mycarenetConversation?: models.MycarenetConversation
+  memberDataResponse?: Array<models.MemberDataResponse>
+
+  message?: string
+
+  minor?: string
 
   reference?: string
 
-  subscriptionsStartDate?: number
-
-  xades?: Array<string>
+  valueHash?: string
 }

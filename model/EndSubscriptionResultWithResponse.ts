@@ -30,6 +30,10 @@ export class EndSubscriptionResultWithResponse {
   }
   commonOutput?: models.CommonOutput
 
+  errors?: Array<models.MycarenetError>
+
+  genericErrors?: Array<models.FaultType>
+
   kmehrMessage?: Array<string>
 
   mycarenetConversation?: models.MycarenetConversation

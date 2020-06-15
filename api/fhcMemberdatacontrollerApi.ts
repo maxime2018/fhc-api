@@ -42,6 +42,64 @@ export class fhcMemberdatacontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
+  confirmAcksUsingPOST1(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpName: string,
+    mdaAcksHashes: Array<string>
+  ): Promise<boolean | any> {
+    let _body = null
+    _body = mdaAcksHashes
+
+    const _url =
+      this.host +
+      "/mda/async/confirm/acks" +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpName ? "&hcpName=" + hcpName : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
+  confirmDmgMessagesUsingPOST1(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    xFHCPassPhrase: string,
+    hcpNihii: string,
+    hcpName: string,
+    mdaMessagesHashes: Array<string>
+  ): Promise<boolean | any> {
+    let _body = null
+    _body = mdaMessagesHashes
+
+    const _url =
+      this.host +
+      "/mda/async/confirm/messages" +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
+      (hcpName ? "&hcpName=" + hcpName : "")
+    let headers = this.headers
+    headers = headers
+      .filter(h => h.header !== "Content-Type")
+      .concat(new XHR.Header("Content-Type", "application/json"))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
+    headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
+    return XHR.sendCommand("POST", _url, headers, _body)
+      .then(doc => JSON.parse(JSON.stringify(doc.body)))
+      .catch(err => this.handleError(err))
+  }
   getMemberDataByMembershipUsingGET(
     io: string,
     ioMembership: string,
@@ -93,7 +151,7 @@ export class fhcMemberdatacontrollerApi {
     hcpSsin: string,
     hcpName: string,
     messageNames: Array<string>
-  ): Promise<models.MemberDataResponseDto | any> {
+  ): Promise<models.MemberDataList | any> {
     let _body = null
 
     const _url =
@@ -113,7 +171,7 @@ export class fhcMemberdatacontrollerApi {
     headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
-      .then(doc => new models.MemberDataResponseDto(doc.body as JSON))
+      .then(doc => new models.MemberDataList(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
   getMemberDataUsingGET(

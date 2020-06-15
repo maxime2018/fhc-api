@@ -24,25 +24,15 @@
 
 import * as models from "./models"
 
-export class StartSubscriptionResultWithResponse {
+export class MemberDataList {
   constructor(json: JSON | any) {
-    Object.assign(this as StartSubscriptionResultWithResponse, json)
+    Object.assign(this as MemberDataList, json)
   }
-  commonOutput?: models.CommonOutput
+  acks?: Array<models.MemberDataAcknowledge>
 
-  errors?: Array<models.MycarenetError>
+  date?: Date
 
-  genericErrors?: Array<models.FaultType>
-
-  inscriptionDate?: number
-
-  kmehrMessage?: Array<string>
+  memberDataMessageList?: Array<models.MemberDataMessage>
 
   mycarenetConversation?: models.MycarenetConversation
-
-  reference?: string
-
-  subscriptionsStartDate?: number
-
-  xades?: Array<string>
 }
