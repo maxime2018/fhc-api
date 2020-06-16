@@ -32,6 +32,8 @@ export class MemberDataList {
 
   date?: Date
 
+  genericErrors?: Array<models.FaultType>
+
   memberDataMessageList?: Array<models.MemberDataMessage>
 
   mycarenetConversation?: models.MycarenetConversation

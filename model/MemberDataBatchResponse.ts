@@ -24,25 +24,21 @@
 
 import * as models from "./models"
 
-export class MemberDataMessage {
+export class MemberDataBatchResponse {
   constructor(json: JSON | any) {
-    Object.assign(this as MemberDataMessage, json)
+    Object.assign(this as MemberDataBatchResponse, json)
   }
-  appliesTo?: string
+  assertions?: Array<models.Assertion>
 
-  commonOutput?: models.CommonOutput
+  errors?: Array<models.FaultType>
 
-  complete?: boolean
+  inResponseTo?: string
 
-  errors?: Array<models.MycarenetError>
+  issuer?: string
 
-  genericErrors?: Array<models.FaultType>
+  myCarenetErrors?: Array<models.MycarenetError>
 
-  io?: string
+  responseId?: string
 
-  memberDataResponse?: Array<models.MemberDataBatchResponse>
-
-  reference?: string
-
-  valueHash?: string
+  status?: models.MdaStatus
 }
