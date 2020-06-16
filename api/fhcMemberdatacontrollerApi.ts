@@ -42,7 +42,7 @@ export class fhcMemberdatacontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  confirmMemberDataAcksUsingPOST(
+  confirmMemberDataAcksAsyncUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
@@ -71,7 +71,7 @@ export class fhcMemberdatacontrollerApi {
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  confirmMemberDataMessagesUsingPOST(
+  confirmMemberDataMessagesAsyncUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
@@ -143,12 +143,11 @@ export class fhcMemberdatacontrollerApi {
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  getMemberDataMessageUsingPOST(
+  getMemberDataMessageAsyncUsingPOST(
     xFHCTokenId: string,
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
     messageNames: Array<string>
   ): Promise<models.MemberDataList | any> {
@@ -160,7 +159,6 @@ export class fhcMemberdatacontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
-      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
       (messageNames ? "&messageNames=" + messageNames : "")
     let headers = this.headers
@@ -301,12 +299,11 @@ export class fhcMemberdatacontrollerApi {
       .then(doc => new models.MemberDataResponse(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
-  sendMemberDataRequestUsingPOST(
+  sendMemberDataRequestAsyncUsingPOST(
     xFHCTokenId: string,
     xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
-    hcpSsin: string,
     hcpName: string,
     io: string,
     mdaRequest: models.MemberDataBatchRequestDto,
@@ -325,7 +322,6 @@ export class fhcMemberdatacontrollerApi {
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
-      (hcpSsin ? "&hcpSsin=" + hcpSsin : "") +
       (hcpName ? "&hcpName=" + hcpName : "") +
       (hcpQuality ? "&hcpQuality=" + hcpQuality : "") +
       (date ? "&date=" + date : "") +
