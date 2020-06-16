@@ -24,15 +24,15 @@
 
 import * as models from "./models"
 
-export class MemberDataList {
+export class MemberDataAck {
   constructor(json: JSON | any) {
-    Object.assign(this as MemberDataList, json)
+    Object.assign(this as MemberDataAck, json)
   }
-  acks?: Array<models.MemberDataAck>
-
   date?: Date
 
-  memberDataMessageList?: Array<models.MemberDataMessage>
+  major?: string
 
-  mycarenetConversation?: models.MycarenetConversation
+  message?: string
+
+  minor?: string
 }
