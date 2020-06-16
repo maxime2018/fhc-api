@@ -42,7 +42,7 @@ export class fhcMemberdatacontrollerApi {
     else throw Error("api-error" + e.status)
   }
 
-  confirmAcksUsingPOST1(
+  confirmMemberDataAcksUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
@@ -71,7 +71,7 @@ export class fhcMemberdatacontrollerApi {
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
-  confirmDmgMessagesUsingPOST1(
+  confirmMemberDataMessagesUsingPOST(
     xFHCKeystoreId: string,
     xFHCTokenId: string,
     xFHCPassPhrase: string,
