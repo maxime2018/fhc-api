@@ -43,8 +43,8 @@ export class fhcMemberdatacontrollerApi {
   }
 
   confirmMemberDataAcksAsyncUsingPOST(
-    xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
@@ -64,16 +64,16 @@ export class fhcMemberdatacontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
       .catch(err => this.handleError(err))
   }
   confirmMemberDataMessagesAsyncUsingPOST(
-    xFHCKeystoreId: string,
     xFHCTokenId: string,
+    xFHCKeystoreId: string,
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
@@ -93,8 +93,8 @@ export class fhcMemberdatacontrollerApi {
     headers = headers
       .filter(h => h.header !== "Content-Type")
       .concat(new XHR.Header("Content-Type", "application/json"))
-    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId))
+    headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId))
     headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase))
     return XHR.sendCommand("POST", _url, headers, _body)
       .then(doc => JSON.parse(JSON.stringify(doc.body)))
