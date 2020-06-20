@@ -77,10 +77,10 @@ export class fhcMemberdatacontrollerApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
-    mdaMessagesHashes: Array<string>
+    mdaMessagesReference: Array<string>
   ): Promise<boolean | any> {
     let _body = null
-    _body = mdaMessagesHashes
+    _body = mdaMessagesReference
 
     const _url =
       this.host +
