@@ -33,4 +33,6 @@ export class MemberInfoDto {
   ioMembership?: string
 
   ssin?: string
+
+  uniqId?: string
 }
