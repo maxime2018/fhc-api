@@ -305,7 +305,6 @@ export class fhcMemberdatacontrollerApi {
     xFHCPassPhrase: string,
     hcpNihii: string,
     hcpName: string,
-    io: string,
     mdaRequest: models.MemberDataBatchRequestDto,
     hcpQuality?: string,
     date?: number,
@@ -318,7 +317,7 @@ export class fhcMemberdatacontrollerApi {
 
     const _url =
       this.host +
-      "/mda/async/request/{io}".replace("{io}", io + "") +
+      "/mda/async/request" +
       "?ts=" +
       new Date().getTime() +
       (hcpNihii ? "&hcpNihii=" + hcpNihii : "") +
