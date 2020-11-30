@@ -524,7 +524,9 @@ export class fhcHubApi {
     sl: string,
     id: string,
     hubPackageId?: string,
-    breakTheGlassReason?: string
+    breakTheGlassReason?: string,
+    externalHubId?: string,
+    externalHubName?: string
   ): Promise<Kmehrmessage> {
     let _body = null
 
@@ -545,7 +547,9 @@ export class fhcHubApi {
       (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "")
+        : "") +
+      (externalHubId ? "&externalHubId=" + externalHubId : "") +
+      (externalHubName ? "&externalHubName=" + externalHubName : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
@@ -589,7 +593,9 @@ export class fhcHubApi {
     sl: string,
     id: string,
     hubPackageId?: string,
-    breakTheGlassReason?: string
+    breakTheGlassReason?: string,
+    externalHubId?: string,
+    externalHubName?: string
   ): Promise<Kmehrmessage> {
     let _body = null
 
@@ -610,7 +616,9 @@ export class fhcHubApi {
       (hubPackageId ? "&hubPackageId=" + encodeURIComponent(String(hubPackageId)) : "") +
       (breakTheGlassReason
         ? "&breakTheGlassReason=" + encodeURIComponent(String(breakTheGlassReason))
-        : "")
+        : "") +
+        (externalHubId ? "&externalHubId=" + externalHubId : "") +
+        (externalHubName ? "&externalHubName=" + externalHubName : "")
     let headers = this.headers
     xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
