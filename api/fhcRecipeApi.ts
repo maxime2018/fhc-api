@@ -12,6 +12,7 @@
 import { XHR } from "./XHR"
 import { Code } from "../model/Code"
 import { Feedback } from "../model/Feedback"
+import { GetPrescriptionStatusResult } from "../model/GetPrescriptionStatusResult"
 import { Kmehrmessage } from "../model/Kmehrmessage"
 import { Prescription } from "../model/Prescription"
 import { PrescriptionFullWithFeedback } from "../model/PrescriptionFullWithFeedback"
@@ -187,6 +188,39 @@ export class fhcRecipeApi {
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
       .then(doc => new Kmehrmessage(doc.body as JSON))
+      .catch(err => this.handleError(err))
+  }
+
+  /**
+   *
+   * @summary getPrescriptionStatus
+   * @param xFHCKeystoreId X-FHC-keystoreId
+   * @param xFHCTokenId X-FHC-tokenId
+   * @param hcpNihii hcpNihii
+   * @param xFHCPassPhrase X-FHC-passPhrase
+   * @param rid rid
+   */
+  getPrescriptionStatusUsingGET(
+    xFHCKeystoreId: string,
+    xFHCTokenId: string,
+    hcpNihii: string,
+    xFHCPassPhrase: string,
+    rid: string
+  ): Promise<GetPrescriptionStatusResult> {
+    let _body = null
+
+    const _url =
+      this.host +
+      `/recipe/${encodeURIComponent(String(rid))}/status` +
+      "?ts=" +
+      new Date().getTime() +
+      (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "")
+    let headers = this.headers
+    xFHCKeystoreId && (headers = headers.concat(new XHR.Header("X-FHC-keystoreId", xFHCKeystoreId)))
+    xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
+    xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
+    return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
+      .then(doc => new GetPrescriptionStatusResult(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
