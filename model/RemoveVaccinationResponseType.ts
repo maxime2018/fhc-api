@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { StatusType } from "./StatusType"
+import { VaccinationStatusType } from "./VaccinationStatusType"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -19,6 +19,6 @@ export class RemoveVaccinationResponseType {
   }
 
   patientId?: string
-  status?: StatusType
+  status?: VaccinationStatusType
   vaccinationId?: string
 }

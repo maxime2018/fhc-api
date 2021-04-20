@@ -9,18 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { VaccinationId } from "./VaccinationId"
-import { VaccinationStatusType } from "./VaccinationStatusType"
 
 import { decodeBase64 } from "./ModelHelper"
 
-export class Results {
+export class VaccinationStatusType {
   constructor(json: JSON | any) {
-    Object.assign(this as Results, json)
+    Object.assign(this as VaccinationStatusType, json)
   }
 
-  kmehrId?: string
-  status?: VaccinationStatusType
-  stocked?: number
-  vaccinationId?: VaccinationId
+  code?: string
+  message?: string
 }

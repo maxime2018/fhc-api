@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { Results } from "./Results"
-import { StatusType } from "./StatusType"
+import { VaccinationStatusType } from "./VaccinationStatusType"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -21,5 +21,5 @@ export class AddVaccinationsResponseType {
 
   patientId?: string
   results?: Array<Results>
-  status?: StatusType
+  status?: VaccinationStatusType
 }

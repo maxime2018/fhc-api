@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { Base64EncodedKmehr } from "./Base64EncodedKmehr"
-import { StatusType } from "./StatusType"
+import { VaccinationStatusType } from "./VaccinationStatusType"
 
 import { decodeBase64 } from "./ModelHelper"
 
@@ -21,5 +21,5 @@ export class GetVaccinationsResponseType {
 
   base64EncodedKmehr?: Base64EncodedKmehr
   patientId?: string
-  status?: StatusType
+  status?: VaccinationStatusType
 }
