@@ -49,6 +49,9 @@ export class fhcVaccinnetApi {
    * @param hcpNihii hcpNihii
    * @param hcpName hcpName
    * @param hcpQuality hcpQuality
+   * @param hcpSupervisorNihii hcpSupervisorNihii
+   * @param hcpSupervisorName hcpSupervisorName
+   * @param hcpSupervisorQuality hcpSupervisorQuality
    * @param patientFirstName patientFirstName
    * @param patientLastName patientLastName
    * @param patientDateOfBirth patientDateOfBirth
@@ -63,6 +66,9 @@ export class fhcVaccinnetApi {
     hcpNihii: string,
     hcpName: string,
     hcpQuality: string,
+    hcpSupervisorNihii: string,
+    hcpSupervisorName: string,
+    hcpSupervisorQuality: string,
     patientFirstName: string,
     patientLastName: string,
     patientDateOfBirth: number,
@@ -81,6 +87,15 @@ export class fhcVaccinnetApi {
       (hcpNihii ? "&hcpNihii=" + encodeURIComponent(String(hcpNihii)) : "") +
       (hcpName ? "&hcpName=" + encodeURIComponent(String(hcpName)) : "") +
       (hcpQuality ? "&hcpQuality=" + encodeURIComponent(String(hcpQuality)) : "") +
+      (hcpSupervisorNihii
+        ? "&hcpSupervisorNihii=" + encodeURIComponent(String(hcpSupervisorNihii))
+        : "") +
+      (hcpSupervisorName
+        ? "&hcpSupervisorName=" + encodeURIComponent(String(hcpSupervisorName))
+        : "") +
+      (hcpSupervisorQuality
+        ? "&hcpSupervisorQuality=" + encodeURIComponent(String(hcpSupervisorQuality))
+        : "") +
       (patientFirstName
         ? "&patientFirstName=" + encodeURIComponent(String(patientFirstName))
         : "") +

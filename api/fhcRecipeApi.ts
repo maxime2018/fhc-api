@@ -13,11 +13,11 @@ import { XHR } from "./XHR"
 import { Code } from "../model/Code"
 import { Feedback } from "../model/Feedback"
 import { GetPrescriptionStatusResult } from "../model/GetPrescriptionStatusResult"
-import { Kmehrmessage } from "../model/Kmehrmessage"
 import { Prescription } from "../model/Prescription"
 import { PrescriptionFullWithFeedback } from "../model/PrescriptionFullWithFeedback"
 import { PrescriptionRequest } from "../model/PrescriptionRequest"
 import { PutVisionResult } from "../model/PutVisionResult"
+import { RecipeKmehrmessageType } from "../model/RecipeKmehrmessageType"
 import { UpdateFeedbackFlagResult } from "../model/UpdateFeedbackFlagResult"
 
 export class fhcRecipeApi {
@@ -172,7 +172,7 @@ export class fhcRecipeApi {
     hcpQuality?: string,
     hcpSsin?: string,
     hcpName?: string
-  ): Promise<Kmehrmessage> {
+  ): Promise<RecipeKmehrmessageType> {
     let _body = null
 
     const _url =
@@ -189,7 +189,7 @@ export class fhcRecipeApi {
     xFHCTokenId && (headers = headers.concat(new XHR.Header("X-FHC-tokenId", xFHCTokenId)))
     xFHCPassPhrase && (headers = headers.concat(new XHR.Header("X-FHC-passPhrase", xFHCPassPhrase)))
     return XHR.sendCommand("GET", _url, headers, _body, this.fetchImpl)
-      .then(doc => new Kmehrmessage(doc.body as JSON))
+      .then(doc => new RecipeKmehrmessageType(doc.body as JSON))
       .catch(err => this.handleError(err))
   }
 
